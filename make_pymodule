@@ -1,0 +1,28 @@
+DIR =/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7/
+CC=gcc
+CFLAGS=-I$(DIR)
+
+ODIR=.
+
+LIBS=-lm
+
+_DEPS =
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+_OBJ = py_module.o 
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+
+$(ODIR)/%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+py_module: $(OBJ)
+	gcc -o $@ $^ $(CFLAGS) $(LIBS)
+	echo $OBJ
+	echo $DEPS
+	echo "$(CC) -c -o $@ $< $(CFLAGS)"
+
+.PHONY: clean
+
+clean:
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
