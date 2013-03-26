@@ -9,14 +9,14 @@ LIBS=-lpython2.7
 _DEPS =
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = py_module.o 
+_OBJ = hellomodule.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-py_module: $(OBJ)
+hellomodule: $(OBJ)
 	gcc -shared $^ $(CFLAGS) -I$(LIBS_DIR) $(LIBS) -o $@
 
 .PHONY: clean
