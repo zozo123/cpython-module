@@ -2,4 +2,3 @@
 hellomodule
 *.so
 build
-build/
